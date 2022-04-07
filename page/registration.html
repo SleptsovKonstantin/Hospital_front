@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospital</title>
+  <title>Региcтрация</title>
   <link rel="stylesheet" type="text/css" href="../style/style_registration.css">
   <script src="../script/script_registration.js"></script>
   <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
@@ -31,25 +31,25 @@
             <div class="inpts">
               
               <div class="inlet">
-                <h3>Логин</h3>
-                <input type="text" placeholder="Логин">
+                <h3>Логин:</h3>
+                <input id="newLogin" type="text" placeholder="Логин" minlength="6">
               </div>
         
               <div class="inlet">
-                <h3>Пароль</h3>
-                <input type="text" placeholder="Пароль">
+                <h3>Пароль:</h3>
+                <input id="newPass" type="password" placeholder="Пароль" minlength="6">
               </div>
 
               <div class="inlet">
-                <h3>Повторите пароль</h3>
-                <input type="text" placeholder="Пароль">
+                <h3>Повторите пароль:</h3>
+                <input id="newPassRep" type="password" placeholder="Пароль" minlength="6">
               </div>
 
             </div>
     
           <div class="buttonClick">
-            <button class="in">Зарегестрироваться</button>
-            <button class="registration">Авторизоваться</button>
+            <button class="in" onclick="onClickRegist()">Зарегистрироваться</button>
+            <button class="registration" onclick="onClickAutoriz()">Авторизоваться</button>
           </div>
     
         </div>

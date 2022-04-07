@@ -102,7 +102,7 @@
 }
 
 .inlet h3 {
-  width: 55px;
+  width: 180px;
   height: 21px;
   font-family: "Roboto";
   font-style: normal;
@@ -154,6 +154,7 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
+  cursor: pointer;
 }
 
 .registration {
@@ -166,6 +167,7 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 830px) {
