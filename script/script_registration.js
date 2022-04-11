@@ -5,6 +5,7 @@ let valueInputLog = "";
 let valueInputPass = "";
 let valueInputPassRep = "";
 const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/; //латиница и цифры
+const lenghtPass = /^[a-zA-Z]{6,}$/;
 
 window.onload = () => {
   inputLog = document.getElementById("newLogin");
@@ -32,8 +33,8 @@ const updateValuePasRep = (event) => {
 const onClickRegist = async () => {
   if (valueInputLog && valueInputPass && valueInputPassRep) {
     if (
-      !valueInputLog.length <= 6 &&
-      !valueInputPass.length <= 6 &&
+      lenghtPass.test(valueInputLog) &&
+      lenghtPass.test(valueInputPass) &&
       valueInputPassRep
     ) {
       if (valueInputPassRep === valueInputPass) {
@@ -65,16 +66,20 @@ const onClickRegist = async () => {
             alert("Такой пользователь уже существует!");
           }
         } else {
-          alert("Пароли не совпадают!");
+          alert(
+            "Пароль должен содержать латинские буквы, минимум 1 заглавную букву и 1 цифру!"
+          );
         }
       } else {
-        alert(
-          "Проверьте ввод данных. Длина логина и пароля должна быть не меньше 6 символов!"
-        );
+        alert("Пароли не совпадают!");
       }
+    } else {
+      alert(
+        "Проверьте ввод данных. Длина логина и пароля должна быть не меньше 6 символов!"
+      );
     }
   } else {
-    alert("Данные не введены!");
+    alert("Введены не все данные!");
   }
 };
 
