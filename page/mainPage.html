@@ -11,6 +11,50 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.2/underscore-umd-min.js"></script>
 </head>
 <body>
-  
+  <div class="flagman">
+
+    <div class="header">
+      <div class="left">
+        <img src="../img/Krest.png" alt="">
+        <h1>Приемы</h1>
+      </div>
+      <div class="exit">
+        <button class="exitBut" onclick="exitPage()">Выход</button>
+      </div>
+    </div>
+
+    <div  class="inputRec">
+      <div class="inputDiv">
+        <h3>Имя:</h3>
+        <input id="inputName" type="text">
+      </div>
+      <div class="inputDiv">
+        <h3>Врач:</h3>
+        <select id="select" size="1" >
+          <option selected value="s1"></option>
+          <option value="Доктор 1">Доктор 1</option>
+          <option value="Доктор 2">Доктор 2</option>
+          <option value="Доктор 3">Доктор 3</option>
+         </select>
+      </div>
+      <div class="inputDiv">
+        <h3>Дата:</h3>
+        <input id="date" type="date">
+      </div>
+      <div class="inputDiv">
+        <h3>Жалобы:</h3>
+        <input id="inputComp" type="text">
+      </div>
+      <div class="inputDiv">
+        <button id="addRec" onclick="addRecord()">Добавить</button>
+      </div>
+    </div>
+
+    <div class="recordAndFields">
+      <div id="fields"></div>
+      <div id="records"></div>
+    </div>
+
+  </div>
 </body>
 </html>
