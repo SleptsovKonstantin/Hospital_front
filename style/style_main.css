@@ -119,6 +119,53 @@
 .recordAndFields {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 989px;
   height: 458px;
+}
+/* блок верх */
+#fields {
+  display: flex;
+  flex-direction: column;
+  width: 989px;
+  align-items: flex-end;
+}
+/* блок сортировки  */
+#sortRecord {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 5px;
+  margin: 20px 0 20px 0;
+}
+
+#sortRecord p {
+  width: 166px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+#inputSort {
+  width: 200px;
+  height: 47px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#upTable {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 941px;
+  height: 47.71px;
+  background: #c4c4c4;
 }
