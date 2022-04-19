@@ -1,4 +1,5 @@
 let arrayRecords = [];
+
 let inputName = null;
 let inputDoctor = null;
 let inputDate = null;
@@ -8,176 +9,453 @@ let valueInputDoctor = "";
 let valueInputDate = "";
 let valueInputComp = "";
 
+let valueSort = "id";
+let valueDirection = "";
+
+let newDate = null;
+let flag = null;
+
+let deleteIndex = null;
+let updateIndex = null;
+
+let inputNameUp = null;
+let selectUp = null;
+let dateUp = null;
+let inputCompUp = null;
+let valueInputNewName = "";
+let valueInputNewDoc = "";
+let valueInputNewDate = "";
+let valueInputNewComp = "";
+
 const dateYesterday = new Date();
 const formatDate = (date) => {
-  let dd = date.getDate();
-
-  if (dd < 10) dd = "0" + dd;
-
-  let mm = date.getMonth() + 1;
-
-  if (mm < 10) mm = "0" + mm;
-
-  let yy = date.getFullYear();
-
-  if (yy < 10) yy = "0" + yy;
-
-  return dd + "." + mm + "." + yy;
+    let dd = date.getDate();
+    if (dd < 10) dd = "0" + dd;
+    let mm = date.getMonth() + 1;
+    if (mm < 10) mm = "0" + mm;
+    let yy = date.getFullYear();
+    if (yy < 10) yy = "0" + yy;
+    return dd + "." + mm + "." + yy;
 };
 const newDateFormate = formatDate(dateYesterday);
-console.log(newDateFormate);
+// console.log(newDateFormate);
+const oldDateFormate = newDateFormate.split(".").reverse().join("-");
+// console.log(oldDateFormate);
+
 
 window.onload = async () => {
-  inputName = document.getElementById("inputName");
-  inputName.addEventListener("change", updateValueName);
+    inputNameUp = document.getElementById("inputNameUp");
+    inputNameUp.addEventListener("change", updateValueNewName);
 
-  inputDoctor = document.getElementById("select");
-  inputDoctor.addEventListener("change", updateValueDoctor);
+    selectUp = document.getElementById("selectUp");
+    selectUp.addEventListener("change", updateValueNewDoc);
 
-  inputDate = document.getElementById("date");
-  inputDate.addEventListener("change", updateValueDate);
+    dateUp = document.getElementById("dateUp");
+    dateUp.addEventListener("change", updateValueNewDate);
 
-  inputComp = document.getElementById("inputComp");
-  inputComp.addEventListener("change", updateValueComp);
+    inputCompUp = document.getElementById("inputCompUp");
+    inputCompUp.addEventListener("change", updateValueNewComp);
 
-  const resp = await fetch("http://localhost:8000/api/records/findAllRecord", {
-    method: "GET",
-  });
-  const data = await resp.json();
-  arrayRecords = data;
-  console.log(arrayRecords);
-  render();
-};
+    const renderDate = document.getElementById("date");
+    renderDate.value = oldDateFormate;
 
-const updateValueName = (event) => {
-  valueInputName = event.target.value.trim();
-};
+    inputName = document.getElementById("inputName");
+    inputName.addEventListener("change", updateValueName);
 
-const updateValueDoctor = (event) => {
-  valueInputDoctor = event.target.value.trim();
-};
+    inputDoctor = document.getElementById("select");
+    inputDoctor.addEventListener("change", updateValueDoctor);
 
-const updateValueDate = (event) => {
-  valueInputDate = event.target.value.trim();
-  console.log(valueInputDate);
-};
+    inputDate = document.getElementById("date");
+    inputDate.addEventListener("change", updateValueDate);
 
-const updateValueComp = (event) => {
-  valueInputComp = event.target.value.trim();
-};
+    inputComp = document.getElementById("inputComp");
+    inputComp.addEventListener("change", updateValueComp);
+    // console.log(`при загрузки страницы`);
 
-const exitPage = () => {
-  localStorage.clear();
-  window.location.href = "autorization.html";
-};
-
-const addRecord = async () => {
-  if (
-    valueInputName &&
-    valueInputDoctor &&
-    (valueInputDate || newDateFormate) &&
-    valueInputComp
-  ) {
-    const resp = await fetch("http://localhost:8000/api/records/createRecord", {
-      method: "POST",
-      headers: {
-        authorization: localStorage.getItem("token"),
-        "Content-Type": "application/json;charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        name: valueInputName,
-        doctor: valueInputDoctor,
-        data: valueInputDate || newDateFormate,
-        complaint: valueInputComp,
-      }),
+    const resp = await fetch("http://localhost:8000/api/records/findAllRecord", {
+        method: "GET",
     });
     const data = await resp.json();
     arrayRecords = data;
-    inputName = "";
-    valueInputName = "";
-    valueInputDoctor = "";
-    valueInputDate = "";
-    valueInputComp = "";
+    console.log(arrayRecords);
     render();
-  } else {
-    alert("Введены не все данные!");
-  }
+};
+// ФУНКЦИИ ИНПУТОВ 
+const updateValueName = (event) => {
+    valueInputName = event.target.value.trim();
 };
 
+const updateValueDoctor = (event) => {
+    valueInputDoctor = event.target.value.trim();
+};
+
+const updateValueDate = (event) => {
+    valueInputDate = event.target.value.trim();
+    newDate = valueInputDate.split("-").reverse().join(".");
+    return newDate;
+};
+
+const updateValueComp = (event) => {
+    valueInputComp = event.target.value.trim();
+};
+//ВЫХОД ИЗ МЕНЮ
+const exitPage = () => {
+    localStorage.clear();
+    window.location.href = "autorization.html";
+};
+// ДОБАВЛЕНИЕ ЗАПИСЕЙ 
+const addRecord = async () => {
+    if (
+        valueInputName &&
+        valueInputDoctor &&
+        (newDate || newDateFormate) &&
+        valueInputComp
+    ) {
+        const resp = await fetch("http://localhost:8000/api/records/createRecord", {
+            method: "POST",
+            headers: {
+                authorization: localStorage.getItem("token"),
+                "Content-Type": "application/json;charset=utf-8",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+                name: valueInputName,
+                doctor: valueInputDoctor,
+                data: newDate || newDateFormate,
+                complaint: valueInputComp,
+            }),
+        });
+        const data = await resp.json();
+        console.log("data", data);
+        arrayRecords.push(data);
+        inputName.value = "";
+        inputDoctor.value = "";
+        inputDate.value = "";
+        inputComp.value = "";
+        valueInputName = "";
+        valueInputDoctor = "";
+        valueInputDate = "";
+        valueInputComp = "";
+        render();
+    } else {
+        alert("Введены не все данные!");
+    }
+};
+// ФУНКЦИИ СОРТИРОВКИ ЗАПИСЕЙ 
+const updateValueSort = (event) => {
+    valueSort = event.target.value;
+    console.log("valueSort", valueSort);
+    sortingRecord();
+}
+
+const updateValueDirection = (event) => {
+    valueDirection = event.target.value;
+    console.log("valueDirection", valueDirection);
+    sortingRecord();
+}
+
+const sortingRecord = async () => {
+    const sort = {};
+    sort[valueSort] = valueDirection || "ASC";
+    const resp = await fetch(`http://localhost:8000/api/records/sortRecords`, {
+        method: "POST",
+        headers: {
+            authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(sort),
+    });
+    const data = await resp.json();
+    console.log(data);
+    arrayRecords = data;
+    render();
+}
+// УДАЛЕНИЕ ПОЛЯ ФИЛЬТРА
+const addFilterData = () => {
+    flag = 1;
+    render();
+}
+
+const deleteFilterData = () => {
+    flag = null;
+    render();
+}
+// УДАЛЕНИЕ ЗАПИСЕЙ 
+const deleteRecord = async (index) => {
+    index = deleteIndex
+    const resp = await fetch(`http://localhost:8000/api/records/deleteOneRecord?id=${index}`, {
+        method: "DELETE",
+    });
+    const data = await resp.json();
+    arrayRecords = data;
+    render();
+}
+// ОБНОВЛЕНИЕ ЗАПИСЕЙ 
+const updateValueNewName = (event) => {
+    valueInputNewName = event.target.value.trim();
+    console.log(valueInputNewName);
+};
+
+
+const updateValueNewDoc = (event) => {
+    valueInputNewDoc = event.target.value.trim();
+    console.log(valueInputNewDoc);
+};
+
+
+const updateValueNewDate = (event) => {
+    valueInputNewDate = event.target.value.trim();
+    console.log(valueInputNewDate);
+};
+
+const updateValueNewComp = (event) => {
+    valueInputNewComp = event.target.value.trim();
+    console.log(valueInputNewComp);
+};
+
+const updateRecord = async () => {
+    let id = updateIndex;
+    const resp = await fetch(`http://localhost:8000/api/records/updateRecord`, {
+        method: "PATCH",
+        headers: {
+            authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+            id,
+            name: valueInputNewName || inputNameUp.value,
+            doctor: valueInputNewDoc || selectUp.value,
+            data: valueInputNewDate || dateUp.value,
+            complaint: valueInputNewComp || inputCompUp.value
+        }),
+    });
+    const data = await resp.json();
+    arrayRecords = data;
+    render();
+}
+// ПРОРИСОВКА ЗАПИСЕЙ 
 const render = () => {
-  const total = document.getElementById("fields");
-  const content = document.getElementById("records");
+    const total = document.getElementById("fields");
+    const filterField = document.getElementById("filterFields");
+    const content = document.getElementById("records");
 
-  while (content.firstChild) {
-    content.removeChild(content.firstChild);
-  }
+    while (content.firstChild) {
+        content.removeChild(content.firstChild);
+    }
 
-  while (total.firstChild) {
-    total.removeChild(total.firstChild);
-  }
-  // ------------- up
-  const sortRecord = document.createElement("div");
-  sortRecord.id = "sortRecord";
-  const sortStr = document.createElement("p");
-  sortStr.innerText = `Сортировать по: `;
+    while (filterField.firstChild) {
+        filterField.removeChild(filterField.firstChild);
+    }
 
-  const inputSort = document.createElement("select");
-  inputSort.id = "inputSort";
-  inputSort.size = "1";
-  const optionOne = document.createElement("option");
-  optionOne.innerText = ``;
-  optionOne.value = `id`;
-  const optionTwo = document.createElement("option");
-  optionTwo.innerText = `Имя`;
-  optionTwo.value = `name`;
-  const optionThree = document.createElement("option");
-  optionThree.innerText = `Врач`;
-  optionThree.value = `doctor`;
-  const optionFour = document.createElement("option");
-  optionFour.innerText = `Дата`;
-  optionFour.value = `data`;
+    while (total.firstChild) {
+        total.removeChild(total.firstChild);
+    }
+    //  сортировка 
+    const sortBlock = document.createElement("div");
+    sortBlock.id = "sortBlock";
+    const sortRecord = document.createElement("div");
+    sortRecord.id = "sortRecord";
+    const sortStr = document.createElement("p");
+    sortStr.innerText = `Сортировать по: `;
+    const inputSort = document.createElement("select");
+    inputSort.id = "inputSort";
+    inputSort.size = "1";
+    const optionOne = document.createElement("option");
+    optionOne.innerText = ``;
+    optionOne.value = `id`;
+    const optionTwo = document.createElement("option");
+    optionTwo.innerText = `Имя`;
+    optionTwo.value = `name`;
+    const optionThree = document.createElement("option");
+    optionThree.innerText = `Врач`;
+    optionThree.value = `doctor`;
+    const optionFour = document.createElement("option");
+    optionFour.innerText = `Дата`;
+    optionFour.value = `data`;
 
-  inputSort.appendChild(optionOne);
-  inputSort.appendChild(optionTwo);
-  inputSort.appendChild(optionThree);
-  inputSort.appendChild(optionFour);
-  sortRecord.appendChild(sortStr);
-  sortRecord.appendChild(inputSort);
 
-  total.appendChild(sortRecord);
-  // ------------------- down table
+    inputSort.appendChild(optionOne);
+    inputSort.appendChild(optionTwo);
+    inputSort.appendChild(optionThree);
+    inputSort.appendChild(optionFour);
+    sortRecord.appendChild(sortStr);
+    sortRecord.appendChild(inputSort);
+    sortBlock.appendChild(sortRecord);
 
-  const upTable = document.createElement("div");
-  upTable.id = "upTable";
-  const nameTable = document.createElement("p");
-  nameTable.innerText = "Имя";
-  nameTable.className = "fieldTableName";
-  const doctorTable = document.createElement("p");
-  doctorTable.innerText = "Врач";
-  doctorTable.className = "fieldTableDoc";
-  const dateTable = document.createElement("p");
-  dateTable.innerText = "Дата";
-  dateTable.className = "fieldTableDate";
-  const compTable = document.createElement("p");
-  compTable.innerText = "Жалобы";
-  compTable.className = "fieldTableComp";
-  const noTable = document.createElement("p");
-  noTable.innerText = "  ";
-  noTable.className = "fieldTableNo";
+    // Направление сортировки
+    const direction = document.createElement("div");
+    direction.id = "direction";
+    const strDirection = document.createElement("p");
+    strDirection.innerText = `Направление:`
+    const inputDirection = document.createElement("select");
+    inputDirection.id = "inputDirection";
+    const optionNo = document.createElement("option");
+    optionNo.innerText = ``;
+    optionNo.value = ``;
+    const optionUp = document.createElement("option");
+    optionUp.innerText = `По возрастанию`;
+    optionUp.value = `ASC`;
+    const optionDown = document.createElement("option");
+    optionDown.innerText = `По убыванию`;
+    optionDown.value = `DESC`;
+    inputDirection.appendChild(optionNo);
+    inputDirection.appendChild(optionUp);
+    inputDirection.appendChild(optionDown);
+    direction.appendChild(strDirection);
+    direction.appendChild(inputDirection);
+    sortBlock.appendChild(direction);
 
-  upTable.appendChild(nameTable);
-  upTable.appendChild(doctorTable);
-  upTable.appendChild(dateTable);
-  upTable.appendChild(compTable);
-  upTable.appendChild(noTable);
-  content.appendChild(upTable);
+    inputSort.addEventListener("change", updateValueSort);
+    inputDirection.addEventListener("change", updateValueDirection);
 
-  const table = document.createElement("table");
+    if (valueSort !== `id`) {
+        inputSort.value = valueSort;
+        inputDirection.value = valueDirection;
+        direction.style.display = "flex";
+        // if (valueSort === "null") {
+        //     direction.style.display = "none";
+        // }
+    } else {
+        direction.style.display = "none";
+    }
 
-  arrayRecords.map((item, index) => {
-    const line = document.createElement("tr");
-    
+    // фильтрация по дате 
+    const filterData = document.createElement("div");
+    filterData.id = "filterData";
+    const strData = document.createElement("p");
+    strData.className = "strData";
+    strData.innerText = "Добавить фильтр по дате: "
+    const addfilter = document.createElement("img");
+    addfilter.src = "../img/AddDate.png";
+    addfilter.type = "button";
+    addfilter.onclick = () => {
+        addFilterData()
+    }
+    filterData.appendChild(strData);
+    filterData.appendChild(addfilter);
 
-  });
+    total.appendChild(filterData);
+    total.appendChild(sortBlock);
+
+    // добавление нижнего блока
+    if (flag === 1) {
+        filterData.style.display = "none";
+        const withBlock = document.createElement("div");
+        withBlock.id = "withBlock";
+        const textWith = document.createElement("p");
+        textWith.innerText = "C: ";
+        const inputWith = document.createElement("input");
+        inputWith.type = "date";
+        inputWith.value = oldDateFormate;
+        withBlock.appendChild(textWith)
+        withBlock.appendChild(inputWith)
+        const onBlock = document.createElement("div");
+        onBlock.id = "onBlock";
+        const textOn = document.createElement("p");
+        textOn.innerText = "По: ";
+        const inputOn = document.createElement("input");
+        inputOn.type = "date";
+        inputOn.value = oldDateFormate;
+        onBlock.appendChild(textOn);
+        onBlock.appendChild(inputOn);
+        const buttonBlock = document.createElement("div");
+        buttonBlock.id = "buttonBlock";
+        const filterButton = document.createElement("input");
+        filterButton.type = "button";
+        filterButton.value = "Фильтровать"
+        const deleteButton = document.createElement("img");
+        deleteButton.src = "../img/delete.png";
+        deleteButton.type = "button";
+        deleteButton.onclick = () => deleteFilterData();
+        buttonBlock.appendChild(filterButton);
+        buttonBlock.appendChild(deleteButton);
+
+        filterField.appendChild(withBlock)
+        filterField.appendChild(onBlock)
+        filterField.appendChild(buttonBlock)
+    }
+
+    // шапка таблицы 
+    const upTable = document.createElement("div");
+    upTable.id = "upTable";
+    const nameTable = document.createElement("p");
+    nameTable.innerText = "Имя";
+    nameTable.className = "fieldTableName";
+    const doctorTable = document.createElement("p");
+    doctorTable.innerText = "Врач";
+    doctorTable.className = "fieldTableDoc";
+    const dateTable = document.createElement("p");
+    dateTable.innerText = "Дата";
+    dateTable.className = "fieldTableDate";
+    const compTable = document.createElement("p");
+    compTable.innerText = "Жалобы";
+    compTable.className = "fieldTableComp";
+    const noTable = document.createElement("p");
+    noTable.innerText = "  ";
+    noTable.className = "fieldTableNo";
+
+    upTable.appendChild(nameTable);
+    upTable.appendChild(doctorTable);
+    upTable.appendChild(dateTable);
+    upTable.appendChild(compTable);
+    upTable.appendChild(noTable);
+    content.appendChild(upTable);
+
+    const table = document.createElement("table");
+    table.id = "newTable";
+
+    //  таблица
+    arrayRecords.map((item, index) => {
+        const line = document.createElement("tr");
+        line.className = "newLine";
+        const trName = document.createElement("th");
+        trName.className = "lineName";
+        trName.innerText = item.name;
+        const trDoc = document.createElement("th");
+        trDoc.className = "lineDoc";
+        trDoc.innerText = item.doctor;
+        const trDate = document.createElement("th");
+        trDate.className = "lineDate";
+        trDate.innerText = item.data.split("-").reverse().join(".");
+        const trComp = document.createElement("th");
+        trComp.className = "lineComp";
+        trComp.innerText = item.complaint;
+        const trButt = document.createElement("th");
+        trButt.className = "lineButt";
+        line.appendChild(trName);
+        line.appendChild(trDoc);
+        line.appendChild(trDate);
+        line.appendChild(trComp);
+
+        const updateRec = document.createElement("img");
+        updateRec.src = "../img/update.png";
+        updateRec.type = "button";
+        updateRec.onclick = () => {
+            updateIndex = item.id;
+            inputNameUp.value = item.name;
+            selectUp.value = item.doctor;
+            dateUp.value = item.data.split(".").reverse().join("-");
+            inputCompUp.value = item.complaint;
+        }
+        updateRec.setAttribute("data-toggle", "modal")
+        updateRec.setAttribute("data-target", "#myModalUpdate")
+
+        const deleteRec = document.createElement("img");
+        deleteRec.src = "../img/delete.png";
+        deleteRec.type = "button";
+        deleteRec.onclick = () => {
+            deleteIndex = item.id;
+        }
+        deleteRec.setAttribute("data-toggle", "modal")
+        deleteRec.setAttribute("data-target", "#myModalDelete")
+
+        trButt.appendChild(updateRec);
+        trButt.appendChild(deleteRec);
+        line.appendChild(trButt);
+
+        table.appendChild(line);
+    });
+    content.appendChild(table);
 };

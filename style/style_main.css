@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
 .flagman {
   display: flex;
   flex-direction: column;
@@ -100,14 +99,17 @@
   cursor: pointer;
 }
 
+#date::-webkit-input-placeholder {
+  text-align: center;
+}
+
 #addRec {
   width: 131px;
-  height: 35px;
+  height: 45px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
-
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
@@ -123,27 +125,192 @@
   width: 989px;
   height: 458px;
 }
-/* блок верх */
+
+/* блок сортировки и фильтра */
 #fields {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   width: 989px;
-  align-items: flex-end;
+  align-items: center;
 }
-/* блок сортировки  */
-#sortRecord {
+
+/* блок фильтра */
+#filterData {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding-top: 5px;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 290px;
+  height: 62px;
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   margin: 20px 0 20px 0;
 }
 
-#sortRecord p {
-  width: 166px;
+.strData {
+  width: 230px;
   height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#filterData img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* блок сортировки  */
+
+#sortBlock {
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  align-items: center;
+  justify-content: end;
+}
+
+#sortRecord {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0 20px 0;
+  height: 62px;
+}
+
+#sortRecord p {
+  width: 145px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#inputSort {
+  width: 200px;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#direction {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 5px 20px 20px;
+  height: 62px;
+}
+
+#direction p {
+  width: 125px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#inputDirection {
+  width: 200px;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+/* фильтр нижний */
+#filterFields {
+  display: flex;
+  flex-direction: row;
+  width: 989px;
+  align-items: center;
+  justify-content: end;
+  padding-right: 45px;
+}
+
+#withBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 300px;
+  justify-content: space-evenly;
+}
+#withBlock p {
+  width: 18px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#withBlock input {
+  width: 238px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#onBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 300px;
+  justify-content: space-evenly;
+}
+
+#onBlock p {
+  width: 29px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#onBlock input {
+  width: 238px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#buttonBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 270px;
+  justify-content: space-evenly;
+}
+
+#buttonBlock input {
+  width: 208px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
@@ -151,21 +318,198 @@
   line-height: 21px;
 }
 
-#inputSort {
-  width: 200px;
-  height: 47px;
-
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  border-radius: 4px;
+#buttonBlock img {
+  width: 24px;
+  height: 30px;
+  cursor: pointer;
 }
 
+/* шапка таблицы */
 #upTable {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   width: 941px;
   height: 47.71px;
   background: #c4c4c4;
+}
+
+/* таблица */
+
+#newTable {
+  display: flex;
+  flex-direction: column;
+  width: 941px;
+  height: 350px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+#newTable::-webkit-scrollbar {
+  width: 0;
+}
+
+.newLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.lineName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 241px;
+  min-height: 60px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineDoc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 231px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineDate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 162px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.lineComp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 202px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineButt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 105px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.lineButt img {
+  cursor: pointer;
+}
+
+.fieldTableName {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 241px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+.fieldTableDoc {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 231px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+.fieldTableDate {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 162px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+.fieldTableComp {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 202px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* width: 642px; */
+  height: 327px;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.modal-header {
+  /* width: 642px; */
+  height: 90px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-body {
+  /* width: 642px; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-footer {
+  /* width: 642px; */
+  height: 90px;
+  background: #ffffff;
+}
+
+#inputNameUp {
+  width: 464px;
+  height: 40px;
+}
+
+#selectUp {
+  width: 464px;
+  height: 40px;
+}
+
+#dateUp {
+  width: 464px;
+  height: 40px;
+}
+
+#inputCompUp {
+  width: 464px;
+  height: 40px;
 }
