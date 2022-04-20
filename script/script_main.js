@@ -38,12 +38,10 @@ const formatDate = (date) => {
     return dd + "." + mm + "." + yy;
 };
 const newDateFormate = formatDate(dateYesterday);
-// console.log(newDateFormate);
 const oldDateFormate = newDateFormate.split(".").reverse().join("-");
-// console.log(oldDateFormate);
-
 
 window.onload = async () => {
+    // инпуты изменения записей
     inputNameUp = document.getElementById("inputNameUp");
     inputNameUp.addEventListener("change", updateValueNewName);
 
@@ -55,7 +53,7 @@ window.onload = async () => {
 
     inputCompUp = document.getElementById("inputCompUp");
     inputCompUp.addEventListener("change", updateValueNewComp);
-
+    // инпуты добавления записи
     const renderDate = document.getElementById("date");
     renderDate.value = oldDateFormate;
 
@@ -70,8 +68,11 @@ window.onload = async () => {
 
     inputComp = document.getElementById("inputComp");
     inputComp.addEventListener("change", updateValueComp);
-    // console.log(`при загрузки страницы`);
 
+    allRecords();
+};
+
+const allRecords = async () => {
     const resp = await fetch("http://localhost:8000/api/records/findAllRecord", {
         method: "GET",
     });
@@ -79,7 +80,8 @@ window.onload = async () => {
     arrayRecords = data;
     console.log(arrayRecords);
     render();
-};
+}
+
 // ФУНКЦИИ ИНПУТОВ 
 const updateValueName = (event) => {
     valueInputName = event.target.value.trim();
@@ -179,7 +181,7 @@ const addFilterData = () => {
 
 const deleteFilterData = () => {
     flag = null;
-    render();
+    allRecords();
 }
 // УДАЛЕНИЕ ЗАПИСЕЙ 
 const deleteRecord = async (index) => {
@@ -234,6 +236,39 @@ const updateRecord = async () => {
     const data = await resp.json();
     arrayRecords = data;
     render();
+}
+// ФИЛЬТРАЦИЯ ЗАПИСЕЙ 
+let valueInputFilterWith = "";
+const inputWithValue = (event) => {
+    valueInputFilterWith = event.target.value.trim();
+    console.log("valueInputFilterWith", valueInputFilterWith);
+}
+
+let valueInputFilterOn = "";
+const inputOnValue = (event) => {
+    valueInputFilterOn = event.target.value.trim();
+    console.log("valueInputFilterOn", valueInputFilterOn);
+}
+
+const filterRecords = async () => {
+    const resp = await fetch(`http://localhost:8000/api/records/filterRecords`, {
+        method: "POST",
+        headers: {
+            authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+            valueInputFilterWith,
+            valueInputFilterOn
+        }),
+    });
+    const data = await resp.json();
+    console.log("data", data);
+    arrayRecords = data;
+    render();
+    inputWith.value = valueInputFilterWith;
+    inputOn.value = valueInputFilterOn;
 }
 // ПРОРИСОВКА ЗАПИСЕЙ 
 const render = () => {
@@ -310,13 +345,10 @@ const render = () => {
     inputSort.addEventListener("change", updateValueSort);
     inputDirection.addEventListener("change", updateValueDirection);
 
-    if (valueSort !== `id`) {
+    if (valueSort !== "id") {
         inputSort.value = valueSort;
         inputDirection.value = valueDirection;
         direction.style.display = "flex";
-        // if (valueSort === "null") {
-        //     direction.style.display = "none";
-        // }
     } else {
         direction.style.display = "none";
     }
@@ -347,8 +379,10 @@ const render = () => {
         const textWith = document.createElement("p");
         textWith.innerText = "C: ";
         const inputWith = document.createElement("input");
+        inputWith.addEventListener("change", inputWithValue);
+        inputWith.id = "inputWith"
         inputWith.type = "date";
-        inputWith.value = oldDateFormate;
+        // inputWith.value = oldDateFormate;
         withBlock.appendChild(textWith)
         withBlock.appendChild(inputWith)
         const onBlock = document.createElement("div");
@@ -356,15 +390,20 @@ const render = () => {
         const textOn = document.createElement("p");
         textOn.innerText = "По: ";
         const inputOn = document.createElement("input");
+        inputOn.addEventListener("change", inputOnValue);
+        inputOn.id = "inputOn";
         inputOn.type = "date";
-        inputOn.value = oldDateFormate;
+        // inputOn.value = oldDateFormate;
         onBlock.appendChild(textOn);
         onBlock.appendChild(inputOn);
         const buttonBlock = document.createElement("div");
         buttonBlock.id = "buttonBlock";
         const filterButton = document.createElement("input");
         filterButton.type = "button";
-        filterButton.value = "Фильтровать"
+        filterButton.value = "Фильтровать";
+        filterButton.onclick = () => {
+            filterRecords();
+        }
         const deleteButton = document.createElement("img");
         deleteButton.src = "../img/delete.png";
         deleteButton.type = "button";
