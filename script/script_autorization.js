@@ -39,7 +39,6 @@ const enterMain = async () => {
       }),
     });
     const { newToken, user } = await resp.json();
-    console.log(user);
     valueInputLog = "";
     valueInputPass = "";
     inputLog.value = "";
