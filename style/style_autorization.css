@@ -1,0 +1,236 @@
+.flagman {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #c5e9ff;
+  height: 100vh;
+}
+
+/* шапка */
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 117px;
+  background: #c5e9ff;
+  box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header img {
+  width: 88px;
+  height: 76px;
+  margin-left: 5%;
+}
+
+.header h1 {
+  width: 300px;
+  height: 42px;
+  margin-left: 5%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+/* основное окно */
+.window {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 500px;
+}
+
+/* левая */
+.picture {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* правая */
+.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.picture img {
+  width: 375px;
+  height: 375px;
+}
+
+/* окно авторизации  */
+.autorization {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 400.5px;
+  height: 453px;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.inpts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 170px;
+}
+
+.autorization h2 {
+  width: 273px;
+  height: 42px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+/* блоки инпутов */
+.inlet {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.inlet h3 {
+  width: 55px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.inlet ::placeholder {
+  width: 80px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.inlet input {
+  width: 321px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+/*  блоки кнопок */
+.buttonClick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  width: 321px;
+  height: 100px;
+}
+
+.in {
+  width: 149px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.registration {
+  width: 173px;
+  height: 21px;
+  border: 0px;
+  background-color: #ffffff;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 830px) {
+  .window {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .picture {
+    display: none;
+  }
+
+  .autorization {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .autorization {
+    width: 380px;
+  }
+}
+
+@media screen and (max-width: 411px) {
+  .autorization {
+    width: 280px;
+  }
+
+  .inlet input {
+    width: 240px;
+    height: 40px;
+  }
+
+  .buttonClick {
+    width: 240px;
+    height: 100px;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .autorization h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 349px) {
+  .header h1 {
+    height: 80px;
+  }
+}
+
+@media screen and (max-width: 411px) {
+  .autorization {
+    width: 250px;
+  }
+
+  .inlet input {
+    width: 210px;
+    height: 40px;
+  }
+  
+  .buttonClick {
+    width: 210px;
+    height: 100px;
+  }
+}

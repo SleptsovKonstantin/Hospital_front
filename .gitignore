@@ -103,11 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-mainPage.html
-autorization.html 
+# mainPage.html
+# autorization.html 
 
-script_autorization.js
-script_main.js
+# script_autorization.js
+# script_main.js
 
-style_autorization.css
-style_main.css
+# style_autorization.css
+# style_main.css
