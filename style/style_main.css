@@ -128,7 +128,6 @@
   height: 458px;
 }
 
-/* блок сортировки и фильтра */
 #fields {
   display: flex;
   flex-direction: row-reverse;
@@ -136,7 +135,6 @@
   align-items: center;
 }
 
-/* блок фильтра */
 #filterData {
   display: flex;
   flex-direction: row;
@@ -144,7 +142,6 @@
   align-items: center;
   width: 290px;
   height: 62px;
-  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   margin: 20px 0 20px 0;
 }
 
@@ -164,8 +161,6 @@
   height: 30px;
   cursor: pointer;
 }
-
-/* блок сортировки  */
 
 #sortBlock {
   display: flex;
@@ -231,7 +226,6 @@
   border-radius: 4px;
 }
 
-/* фильтр нижний */
 #filterFields {
   display: flex;
   flex-direction: row;
@@ -328,7 +322,6 @@
   cursor: pointer;
 }
 
-/* шапка таблицы */
 #upTable {
   display: flex;
   flex-direction: row;
@@ -336,8 +329,6 @@
   height: 47.71px;
   background: #c4c4c4;
 }
-
-/* таблица */
 
 #newTable {
   display: flex;
@@ -472,7 +463,7 @@
   text-align: center;
   margin: 0 0 0px;
 }
-/* jjjjjjjjjjjjjjjjjjjjjj */
+
 .modal-content {
  width: 80%;
   height: 327px;
@@ -504,7 +495,6 @@
   width: 570px;
   height: 40px;
   margin-bottom: 9px;
-  /* padding-left: 10px; */
 }
 
 #selectUp {
