@@ -18,6 +18,9 @@ let flag = null;
 let deleteIndex = null;
 let updateIndex = null;
 
+let valueInputFilterWith = "";
+let valueInputFilterOn = "";
+
 let inputNameUp = null;
 let selectUp = null;
 let dateUp = null;
@@ -38,7 +41,14 @@ const formatDate = (date) => {
     return dd + "." + mm + "." + yy;
 };
 const newDateFormate = formatDate(dateYesterday);
+console.log("newDateFormate",newDateFormate);
 const oldDateFormate = newDateFormate.split(".").reverse().join("-");
+console.log("oldDateFormate",oldDateFormate);
+
+const token = localStorage.getItem('token');
+const login = localStorage.getItem('login');
+
+if(!token || !login) window.location.href = "autorization.html";
 
 window.onload = async () => {
     // инпуты изменения записей
@@ -53,6 +63,7 @@ window.onload = async () => {
 
     inputCompUp = document.getElementById("inputCompUp");
     inputCompUp.addEventListener("change", updateValueNewComp);
+
     // инпуты добавления записи
     const renderDate = document.getElementById("date");
     renderDate.value = oldDateFormate;
@@ -73,8 +84,14 @@ window.onload = async () => {
 };
 
 const allRecords = async () => {
-    const resp = await fetch("http://localhost:8000/api/records/findAllRecord", {
+    let user = login;
+    const resp = await fetch(`http://localhost:8000/api/records/findAllRecord?login=${user}`, {
         method: "GET",
+        headers: {
+            "Authorization": localStorage.getItem("token"),
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+        },
     });
     const data = await resp.json();
     arrayRecords = data;
@@ -93,38 +110,43 @@ const updateValueDoctor = (event) => {
 
 const updateValueDate = (event) => {
     valueInputDate = event.target.value.trim();
+    console.log("valueInputDate", valueInputDate);
     newDate = valueInputDate.split("-").reverse().join(".");
-    return newDate;
+    console.log("newDate", newDate);
 };
 
 const updateValueComp = (event) => {
     valueInputComp = event.target.value.trim();
 };
+
 //ВЫХОД ИЗ МЕНЮ
 const exitPage = () => {
     localStorage.clear();
     window.location.href = "autorization.html";
 };
+
 // ДОБАВЛЕНИЕ ЗАПИСЕЙ 
 const addRecord = async () => {
     if (
         valueInputName &&
         valueInputDoctor &&
-        (newDate || newDateFormate) &&
-        valueInputComp
+        (oldDateFormate || valueInputDate) &&
+        valueInputComp &&
+        login
     ) {
         const resp = await fetch("http://localhost:8000/api/records/createRecord", {
             method: "POST",
             headers: {
-                authorization: localStorage.getItem("token"),
+                "Authorization": localStorage.getItem("token"),
                 "Content-Type": "application/json;charset=utf-8",
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
                 name: valueInputName,
                 doctor: valueInputDoctor,
-                data: newDate || newDateFormate,
+                data: valueInputDate || oldDateFormate,
                 complaint: valueInputComp,
+                user: login
             }),
         });
         const data = await resp.json();
@@ -132,7 +154,7 @@ const addRecord = async () => {
         arrayRecords.push(data);
         inputName.value = "";
         inputDoctor.value = "";
-        inputDate.value = "";
+        inputDate.value = oldDateFormate   ;
         inputComp.value = "";
         valueInputName = "";
         valueInputDoctor = "";
@@ -143,6 +165,7 @@ const addRecord = async () => {
         alert("Введены не все данные!");
     }
 };
+
 // ФУНКЦИИ СОРТИРОВКИ ЗАПИСЕЙ 
 const updateValueSort = (event) => {
     valueSort = event.target.value;
@@ -158,11 +181,15 @@ const updateValueDirection = (event) => {
 
 const sortingRecord = async () => {
     const sort = {};
+    if(valueSort === "id") {
+        valueDirection = "ASC"
+    }
     sort[valueSort] = valueDirection || "ASC";
+    sort.user = login;
     const resp = await fetch(`http://localhost:8000/api/records/sortRecords`, {
         method: "POST",
         headers: {
-            authorization: localStorage.getItem("token"),
+            "Authorization": localStorage.getItem("token"),
             "Content-Type": "application/json;charset=utf-8",
             "Access-Control-Allow-Origin": "*",
         },
@@ -173,6 +200,7 @@ const sortingRecord = async () => {
     arrayRecords = data;
     render();
 }
+
 // УДАЛЕНИЕ ПОЛЯ ФИЛЬТРА
 const addFilterData = () => {
     flag = 1;
@@ -183,16 +211,19 @@ const deleteFilterData = () => {
     flag = null;
     allRecords();
 }
+
 // УДАЛЕНИЕ ЗАПИСЕЙ 
-const deleteRecord = async (index) => {
-    index = deleteIndex
-    const resp = await fetch(`http://localhost:8000/api/records/deleteOneRecord?id=${index}`, {
+const deleteRecord = async (index, deleteLogin) => {
+    index = deleteIndex;
+    deleteLogin = login;
+    const resp = await fetch(`http://localhost:8000/api/records/deleteOneRecord?id=${index}&user=${deleteLogin}`, {
         method: "DELETE",
     });
     const data = await resp.json();
     arrayRecords = data;
     render();
 }
+
 // ОБНОВЛЕНИЕ ЗАПИСЕЙ 
 const updateValueNewName = (event) => {
     valueInputNewName = event.target.value.trim();
@@ -208,7 +239,7 @@ const updateValueNewDoc = (event) => {
 
 const updateValueNewDate = (event) => {
     valueInputNewDate = event.target.value.trim();
-    console.log(valueInputNewDate);
+    console.log("valueInputNewDate", valueInputNewDate);
 };
 
 const updateValueNewComp = (event) => {
@@ -221,7 +252,7 @@ const updateRecord = async () => {
     const resp = await fetch(`http://localhost:8000/api/records/updateRecord`, {
         method: "PATCH",
         headers: {
-            authorization: localStorage.getItem("token"),
+            "Authorization": localStorage.getItem("token"),
             "Content-Type": "application/json;charset=utf-8",
             "Access-Control-Allow-Origin": "*",
         },
@@ -230,21 +261,22 @@ const updateRecord = async () => {
             name: valueInputNewName || inputNameUp.value,
             doctor: valueInputNewDoc || selectUp.value,
             data: valueInputNewDate || dateUp.value,
-            complaint: valueInputNewComp || inputCompUp.value
+            complaint: valueInputNewComp || inputCompUp.value,
+            user: login
         }),
     });
     const data = await resp.json();
     arrayRecords = data;
     render();
 }
-// ФИЛЬТРАЦИЯ ЗАПИСЕЙ 
-let valueInputFilterWith = "";
+
+// ФИЛЬТРАЦИЯ ЗАПИСЕЙ
 const inputWithValue = (event) => {
     valueInputFilterWith = event.target.value.trim();
     console.log("valueInputFilterWith", valueInputFilterWith);
 }
 
-let valueInputFilterOn = "";
+
 const inputOnValue = (event) => {
     valueInputFilterOn = event.target.value.trim();
     console.log("valueInputFilterOn", valueInputFilterOn);
@@ -254,13 +286,14 @@ const filterRecords = async () => {
     const resp = await fetch(`http://localhost:8000/api/records/filterRecords`, {
         method: "POST",
         headers: {
-            authorization: localStorage.getItem("token"),
+            "Authorization": localStorage.getItem("token"),
             "Content-Type": "application/json;charset=utf-8",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify({
             valueInputFilterWith,
-            valueInputFilterOn
+            valueInputFilterOn,
+            user: login
         }),
     });
     const data = await resp.json();
@@ -382,7 +415,6 @@ const render = () => {
         inputWith.addEventListener("change", inputWithValue);
         inputWith.id = "inputWith"
         inputWith.type = "date";
-        // inputWith.value = oldDateFormate;
         withBlock.appendChild(textWith)
         withBlock.appendChild(inputWith)
         const onBlock = document.createElement("div");
@@ -393,7 +425,6 @@ const render = () => {
         inputOn.addEventListener("change", inputOnValue);
         inputOn.id = "inputOn";
         inputOn.type = "date";
-        // inputOn.value = oldDateFormate;
         onBlock.appendChild(textOn);
         onBlock.appendChild(inputOn);
         const buttonBlock = document.createElement("div");

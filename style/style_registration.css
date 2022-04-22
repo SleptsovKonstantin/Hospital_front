@@ -7,6 +7,7 @@
   background: #c5e9ff;
   height: 100vh;
 }
+
 /* шапка */
 .header {
   display: flex;
@@ -44,6 +45,7 @@
   width: 100%;
   height: 500px;
 }
+
 /* левая */
 .picture {
   display: flex;
@@ -51,6 +53,7 @@
   justify-content: center;
   align-items: center;
 }
+
 /* правая */
 .active {
   display: flex;
@@ -177,9 +180,11 @@
     display: flex;
     flex-direction: column;
   }
+
   .picture {
     display: none;
   }
+
   .autorization {
     width: 450px;
   }
@@ -207,6 +212,7 @@
   .autorization {
     width: 380px;
   }
+
   .header h1 {
     width: 300px;
   }
@@ -216,19 +222,23 @@
   .autorization {
     width: 280px;
   }
+
   .inlet input {
     width: 240px;
     height: 40px;
   }
+
   .buttonClick {
     width: 240px;
     height: 100px;
   }
+
   .header h1 {
     width: 260px;
     font-size: 25px;
     line-height: 38px;
   }
+
   .autorization h2 {
     text-align: center;
     font-size: 30px;
@@ -255,10 +265,12 @@
   .autorization {
     width: 250px;
   }
+
   .inlet input {
     width: 210px;
     height: 40px;
   }
+
   .buttonClick {
     width: 210px;
     height: 100px;
