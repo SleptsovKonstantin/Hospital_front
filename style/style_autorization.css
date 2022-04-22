@@ -24,8 +24,8 @@
 }
 
 .header h1 {
-  width: 560px;
-  height: 55px;
+  width: 300px;
+  height: 42px;
   margin-left: 5%;
   font-family: "Roboto";
   font-style: normal;
@@ -76,7 +76,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 220px;
+  height: 170px;
 }
 
 .autorization h2 {
@@ -89,7 +89,6 @@
   line-height: 42px;
   margin-bottom: 0px;
   margin-top: 5px;
-  text-align: center;
 }
 
 .inlet {
@@ -99,7 +98,7 @@
 }
 
 .inlet h3 {
-  width: 180px;
+  width: 55px;
   height: 21px;
   font-family: "Roboto";
   font-style: normal;
@@ -139,22 +138,17 @@
 }
 
 .in {
-  width: 175px;
+  width: 149px;
   height: 40px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 21px;
   cursor: pointer;
 }
 
 .registration {
-  width: 136px;
+  width: 173px;
   height: 21px;
   border: 0px;
   background-color: #ffffff;
@@ -181,31 +175,9 @@
   }
 }
 
-@media screen and (max-width: 629px) {
-  .header h1 {
-    width: 450px;
-    height: 80px;
-    font-size: 30px;
-    line-height: 75px;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .header h1 {
-    width: 450px;
-    height: 80px;
-    font-size: 30px;
-    line-height: 34px;
-  }
-}
-
 @media screen and (max-width: 500px) {
   .autorization {
     width: 380px;
-  }
-
-  .header h1 {
-    width: 300px;
   }
 }
 
@@ -225,9 +197,7 @@
   }
 
   .header h1 {
-    width: 260px;
-    font-size: 25px;
-    line-height: 38px;
+    font-size: 30px;
   }
 
   .autorization h2 {
@@ -238,21 +208,11 @@
 
 @media screen and (max-width: 349px) {
   .header h1 {
-    width: 200px;
-    font-size: 22px;
-    line-height: 36px;
+    height: 80px;
   }
 }
 
-@media screen and (max-width: 320px) {
-  .header h1 {
-    width: 150px;
-    font-size: 16px;
-    line-height: 38px;
-  }
-}
-
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 411px) {
   .autorization {
     width: 250px;
   }
