@@ -44,7 +44,7 @@ const enterMain = async () => {
     inputLog.value = "";
     inputPass.value = "";
 
-    if (newToken && user ) {
+    if (newToken && user) {
       localStorage.setItem("token", newToken);
       localStorage.setItem("login", user.logChange);
       window.location.href = "mainPage.html";
