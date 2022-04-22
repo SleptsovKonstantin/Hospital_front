@@ -4,8 +4,8 @@ let inputPassRep = null;
 let valueInputLog = "";
 let valueInputPass = "";
 let valueInputPassRep = "";
-const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/; //латиница и цифры
-const lenghtPass = /^[a-zA-Z]{6,}$/;
+const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/; 
+const lenghtPass = /^[0-9a-zA-Z!@#$%^&*]{6,}$/;
 
 window.onload = () => {
   inputLog = document.getElementById("newLogin");
@@ -34,15 +34,14 @@ const onClickRegist = async () => {
   if (valueInputLog && valueInputPass && valueInputPassRep) {
     if (
       lenghtPass.test(valueInputLog) &&
-      lenghtPass.test(valueInputPass) &&
-      valueInputPassRep
+      lenghtPass.test(valueInputPass) 
     ) {
       if (valueInputPassRep === valueInputPass) {
         if (patternPas.test(valueInputPass)) {
           const resp = await fetch("http://localhost:8000/api/user/create", {
             method: "POST",
             headers: {
-              authorization: localStorage.getItem("token"),
+              "Authorization": localStorage.getItem("token"),
               "Content-Type": "application/json;charset=utf-8",
               "Access-Control-Allow-Origin": "*",
             },
@@ -51,7 +50,7 @@ const onClickRegist = async () => {
               password: valueInputPass,
             }),
           });
-          const { newToken } = await resp.json();
+          const { newToken, user } = await resp.json();
           valueInputLog = "";
           valueInputPass = "";
           valueInputPassRep = "";
@@ -61,6 +60,7 @@ const onClickRegist = async () => {
 
           if (newToken !== undefined) {
             localStorage.setItem("token", newToken);
+            localStorage.setItem("login", user.logChange);
             window.location.href = "mainPage.html";
           } else {
             alert("Такой пользователь уже существует!");
