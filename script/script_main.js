@@ -221,10 +221,7 @@ const render = () => {
     const deleteRec = document.createElement("img");
     deleteRec.src = "../img/delete.png";
     deleteRec.type = "button";
-    deleteRec.onclick = () => {
-      deleteIndex = item.id;
-    }
-    
+    deleteRec.onclick = () => deleteIndex = item.id;
     deleteRec.setAttribute("data-toggle", "modal")
     deleteRec.setAttribute("data-target", "#myModalDelete")
 
