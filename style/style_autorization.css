@@ -6,7 +6,6 @@
   height: 100vh;
 }
 
-/* шапка */
 .header {
   display: flex;
   flex-direction: row;
@@ -35,7 +34,6 @@
   line-height: 42px;
 }
 
-/* основное окно */
 .window {
   display: flex;
   flex-direction: row;
@@ -44,7 +42,6 @@
   height: 500px;
 }
 
-/* левая */
 .picture {
   display: flex;
   flex-direction: column;
@@ -52,7 +49,6 @@
   align-items: center;
 }
 
-/* правая */
 .active {
   display: flex;
   flex-direction: column;
@@ -65,7 +61,6 @@
   height: 375px;
 }
 
-/* окно авторизации  */
 .autorization {
   display: flex;
   flex-direction: column;
@@ -96,7 +91,6 @@
   margin-top: 5px;
 }
 
-/* блоки инпутов */
 .inlet {
   display: flex;
   flex-direction: column;
@@ -134,7 +128,6 @@
   border-radius: 4px;
 }
 
-/*  блоки кнопок */
 .buttonClick {
   display: flex;
   flex-direction: column;
@@ -228,9 +221,10 @@
     width: 210px;
     height: 40px;
   }
-  
+
   .buttonClick {
     width: 210px;
     height: 100px;
   }
 }
+

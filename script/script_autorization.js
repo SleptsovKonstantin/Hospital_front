@@ -2,7 +2,8 @@ let inputLog = null;
 let inputPass = null;
 let valueInputLog = "";
 let valueInputPass = "";
-const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/; //латиница и цифры
+
+const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
 
 window.onload = () => {
   inputLog = document.getElementById("newLogin");
@@ -29,7 +30,7 @@ const enterMain = async () => {
     const resp = await fetch("http://localhost:8000/api/user/login", {
       method: "POST",
       headers: {
-        authorization: localStorage.getItem("token"),
+        "Authorization": localStorage.getItem("token"),
         "Content-Type": "application/json;charset=utf-8",
         "Access-Control-Allow-Origin": "*",
       },
@@ -44,8 +45,9 @@ const enterMain = async () => {
     inputLog.value = "";
     inputPass.value = "";
 
-    if (newToken) {
+    if (newToken && user) {
       localStorage.setItem("token", newToken);
+      localStorage.setItem("login", user.logChange);
       window.location.href = "mainPage.html";
     } else {
       alert("Неправильный логин или пароль!");

@@ -1,3 +1,553 @@
-body {
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+.flagman {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: #c5e9ff;
+  height: 100vh;
+  margin-right: 90px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 989px;
+  height: 117px;
+  margin-bottom: 8px;
+  background: #c5e9ff;
+  box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.exit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 200px;
+}
+
+.exitBut {
+  width: 156px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.inputRec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 989px;
+  height: 122px;
+  background: #c5e9ff;
+  box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 30px;
+}
+
+.inputDiv h3 {
+  width: 45px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.inputDiv input {
+  width: 188px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#select {
+  width: 188px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#date {
+  cursor: pointer;
+}
+
+#date::-webkit-input-placeholder {
+  text-align: center;
+}
+
+#addRec {
+  width: 131px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+.recordAndFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 989px;
+  height: 458px;
+}
+
+#fields {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 989px;
+  align-items: center;
+}
+
+#filterData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 290px;
+  height: 62px;
+  margin: 20px 0 20px 0;
+}
+
+.strData {
+  width: 230px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#filterData img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#sortBlock {
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  align-items: center;
+  justify-content: end;
+}
+
+#sortRecord {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0 20px 0;
+  height: 62px;
+}
+
+#sortRecord p {
+  width: 145px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#inputSort {
+  width: 200px;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#direction {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 5px 20px 20px;
+  height: 62px;
+}
+
+#direction p {
+  width: 125px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#inputDirection {
+  width: 200px;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#filterFields {
+  display: flex;
+  flex-direction: row;
+  width: 989px;
+  align-items: center;
+  justify-content: end;
+  padding-right: 45px;
+}
+
+#withBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 300px;
+  justify-content: space-evenly;
+}
+
+#withBlock p {
+  width: 18px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#withBlock input {
+  width: 238px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#onBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 300px;
+  justify-content: space-evenly;
+}
+
+#onBlock p {
+  width: 29px;
+  height: 21px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 0 0 0px;
+}
+
+#onBlock input {
+  width: 238px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#buttonBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 270px;
+  justify-content: space-evenly;
+}
+
+#buttonBlock input {
+  width: 208px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+#buttonBlock img {
+  width: 24px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#upTable {
+  display: flex;
+  flex-direction: row;
+  width: 941px;
+  height: 47.71px;
+  background: #c4c4c4;
+}
+
+#newTable {
+  display: flex;
+  flex-direction: column;
+  width: 941px;
+  max-height: 350px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+#newTable::-webkit-scrollbar {
+  width: 0;
+}
+
+.newLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.lineName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 241px;
+  min-height: 60px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineDoc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 231px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineDate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 162px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.lineComp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 202px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  word-break: break-all;
+  padding: 10px;
+  text-align: center;
+}
+
+.lineButt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 105px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: white #000000;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.lineButt img {
+  cursor: pointer;
+}
+
+.fieldTableName {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 241px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+
+.fieldTableDoc {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 231px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+
+.fieldTableDate {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 162px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+
+.fieldTableComp {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 202px;
+  text-align: center;
+  margin: 0 0 0px;
+}
+
+.modal-content {
+ width: 80%;
+  height: 327px;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.modal-header {
+  width: 642px;
+  height: 90px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-body {
+  width: 642px;
+  background: #ffffff;
+  box-shadow: 0 0px 8px rgb(0 0 0 / 50%);
+}
+
+.modal-footer {
+  width: 642px;
+  height: 90px;
+  background: #ffffff;
+  box-shadow: 4px 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#inputNameUp {
+  width: 570px;
+  height: 40px;
+  margin-bottom: 9px;
+}
+
+#selectUp {
+  width: 570px;
+  height: 40px;
+  margin-bottom: 9px;
+  margin-left: 8px;
+}
+
+#dateUp {
+  width: 570px;
+  height: 40px;
+  margin-bottom: 9px
+}
+
+#inputCompUp {
+  width: 570px;
+  height: 40px;
+  margin-bottom: 9px
+}
+
+.inputDivUp h3 {
+  font-size: 21px;
+  margin-bottom: 2px;
+  padding-left: 10px;
+}
+.inputDivUp input {
+  margin-left: 8px;
+}
+
+#myModalLabel {
+  font-size: 36px;
+}
+
+@media screen and (max-width: 1100px) {
+  .header {
+    width: 100%;
+  }
+
+  .inputRec {
+    width: 100%;
+  }
+
+  .fields {
+    width: 100%;
+  }
+
+  .filterFields {
+    width: 100%;
+  }
+
+  #upTable {
+    width: 100%;
+  }
 }
