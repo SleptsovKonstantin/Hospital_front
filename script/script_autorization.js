@@ -2,6 +2,7 @@ let inputLog = null;
 let inputPass = null;
 let valueInputLog = "";
 let valueInputPass = "";
+
 const patternPas = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
 
 window.onload = () => {

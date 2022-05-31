@@ -43,6 +43,7 @@ const login = localStorage.getItem('login');
 if (!token || !login) window.location.href = "autorization.html";
 
 window.onload = async () => {
+
   inputNameUp = document.getElementById("inputNameUp");
   inputNameUp.addEventListener("change", updateValueNewName);
 
@@ -148,6 +149,7 @@ const addRecord = async () => {
     alert("Введены не все данные!");
   }
 };
+
 
 const updateValueNewName = (event) => {
   valueInputNewName = event.target.value.trim();
@@ -283,6 +285,7 @@ const render = () => {
   while (total.firstChild) {
     total.removeChild(total.firstChild);
   }
+
   // sorting 
   const sortBlock = document.createElement("div");
   sortBlock.id = "sortBlock";
